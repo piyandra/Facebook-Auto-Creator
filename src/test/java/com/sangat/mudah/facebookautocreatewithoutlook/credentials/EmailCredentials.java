@@ -6,18 +6,16 @@ public class EmailCredentials {
         return username;
     }
 
-    public EmailCredentials setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
-        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public EmailCredentials setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
-        return this;
     }
 
     private String username;
