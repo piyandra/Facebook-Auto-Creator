@@ -56,48 +56,71 @@ public class LoginEmailPanelTest {
         emailCredentials.setPassword("tIn9Jj9UNKhj5JUv");
         loginEmailPanel.inputUsername.sendKeys(emailCredentials.getUsername());
         loginEmailPanel.inputPassword.sendKeys(emailCredentials.getPassword());
-        Thread.sleep(2_000L);
-        try{
-            WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button")));
-            webElement.click();
-        }catch (TimeoutException e){
-            System.out.println("Element not found");
+        while (true){
+            if (loginEmailPanel.signIn.isDisplayed() && !driver.findElement(By.id("loading")).isDisplayed()){
+                loginEmailPanel.signIn.click();
+                break;
+            }
+
         }
         //Creating Email
         CreateEmail createEmail = new CreateEmail(driver);
         createEmail.setEmailPassword();
         createEmail.setEmailusername();
-        wait.until(ExpectedConditions.elementToBeClickable(createEmail.linkEmail));
-        Thread.sleep(3000L);
-        createEmail.linkEmail.click();
-        createEmail.linkCreateEmailAccount.click();
-        Thread.sleep(3000L);
+        while (true){
+            if (createEmail.linkEmail.isDisplayed() && !driver.findElement(By.id("loading")).isDisplayed()){
+                try {
+                    createEmail.linkEmail.click();
+                    break;
+                } catch (ElementClickInterceptedException ignored){
+                }
+            }
+
+        }
+        while (true){
+            if (createEmail.linkCreateEmailAccount.isDisplayed() && !driver.findElement(By.id("loading")).isDisplayed()){
+                try {
+                    createEmail.linkCreateEmailAccount.click();
+                    break;
+                } catch (ElementClickInterceptedException ignored){
+                }
+            }
+
+        }
+        while (true){
+            if (createEmail.selectEmail.isDisplayed() && !driver.findElement(By.id("loading")).isDisplayed()) {
+                break;
+            }
+        }
         Select select = new Select(createEmail.selectEmail);
         select.selectByValue("yann.my.id");
-        Thread.sleep(3000L);
+        while (true){
+            if (createEmail.usernameField.isDisplayed()){
+                break;
+            }
+        }
         createEmail.usernameField.sendKeys(createEmail.getEmailusername());
         createEmail.passwordField.sendKeys(createEmail.getEmailPassword());
         System.out.println("Email : "+createEmail.getEmailusername()+"@yann.my.id");
         System.out.println("Password : "+createEmail.getEmailPassword());
         createEmail.buttonCreateEmail.click();
         // Goes To Email
-        String panelTab = driver.getWindowHandle();
         driver.switchTo().newWindow(WindowType.TAB);
         driver.get("https://152.42.203.70:8090/snappymail/index.php");
         Webmail webmail = new Webmail(driver);
-        while(!webmail.inputEmail.isDisplayed()){
-            Thread.sleep(1000L);
+        while(true) {
+            if (webmail.inputEmail.isDisplayed()) {
+                break;
+            }
         }
         webmail.inputEmail.sendKeys(createEmail.getEmailusername()+"@yann.my.id");
         webmail.inputPassword.sendKeys(createEmail.getEmailPassword());
         webmail.buttonCommandSubmit.click();
         while (!webmail.editIdentity.isDisplayed()){
-            Thread.sleep(1000L);
         }
         webmail.closeLinks.click();
         webmail.askingCloseWindow.click();
         webmail.askingCloseWindowButtonYes.click();
-        Thread.sleep(3000L);
         String emailTab = driver.getWindowHandle();
 
 
@@ -121,15 +144,17 @@ public class LoginEmailPanelTest {
         registerFacebook.labelMale.click();
         registerFacebook.inputText.sendKeys(registerFacebook.getEmail());
         registerFacebook.inputPassword.sendKeys(registerFacebook.getPassword());
-        Thread.sleep(1_000L);
+        Thread.sleep(500);
         registerFacebook.buttonWebSubmit.click();
-        Thread.sleep(5_000L);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text() = 'Enter the code from your email']")));
-        Thread.sleep(20_000L);
         driver.switchTo().window(emailTab);
-        Thread.sleep(20_000L);
-        webmail.linkReloadMessage.click();
-        Thread.sleep(3_000L);
+        while (true){
+            Thread.sleep(1_000L);
+            if (!webmail.emptyListNotFoundEmail.isDisplayed() && webmail.textSubject.isDisplayed()){
+                break;
+            }
+            webmail.linkReloadMessage.click();
+        }
 
         // Get Code
         Pattern pattern = Pattern.compile("\\d+");
@@ -144,6 +169,5 @@ public class LoginEmailPanelTest {
         }
         wait.until(ExpectedConditions.elementToBeClickable(registerFacebook.buttonConfirm));
         registerFacebook.buttonConfirm.click();
-        Thread.sleep(10_000L);
     }
 }
