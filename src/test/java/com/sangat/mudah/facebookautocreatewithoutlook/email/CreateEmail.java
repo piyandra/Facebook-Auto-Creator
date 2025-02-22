@@ -76,6 +76,9 @@ public class CreateEmail {
     @FindBy(xpath = "//button[contains(@class, 'btn-lg')]")
     public WebElement buttonCreateEmail;
 
+    @FindBy(xpath = "/html/body/div[3]/div[3]/div/div[2]/div[2]/div/div/form/div[6]/div/div[2]")
+    public WebElement emailCreated;
+
     public CreateEmail(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }

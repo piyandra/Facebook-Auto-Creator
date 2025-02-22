@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class FacebookGenerator {
+public class NameGenerator {
 
     public String getFirstName() {
         return firstName;
     }
 
-    public FacebookGenerator setFirstName(String firstName) {
+    public NameGenerator setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
@@ -22,7 +22,7 @@ public class FacebookGenerator {
         return lastName;
     }
 
-    public FacebookGenerator setLastName(String lastName) {
+    public NameGenerator setLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }

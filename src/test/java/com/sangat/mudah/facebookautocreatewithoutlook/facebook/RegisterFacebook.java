@@ -10,6 +10,7 @@ public class RegisterFacebook {
     private String firstName;
 
     public String getFirstName() {
+        firstName = firstName.substring(0,1).toUpperCase() + firstName.substring(1);
         return firstName;
     }
 
@@ -19,6 +20,7 @@ public class RegisterFacebook {
     }
 
     public String getLastName() {
+        lastName = lastName.substring(0,1).toUpperCase() + lastName.substring(1);
         return lastName;
     }
 
@@ -85,8 +87,6 @@ public class RegisterFacebook {
     @FindBy(name = "confirm")
     public WebElement buttonConfirm;
 
-
-    
     public RegisterFacebook(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
