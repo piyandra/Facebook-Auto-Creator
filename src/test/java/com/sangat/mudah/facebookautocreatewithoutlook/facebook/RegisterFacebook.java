@@ -87,6 +87,8 @@ public class RegisterFacebook {
     @FindBy(name = "confirm")
     public WebElement buttonConfirm;
 
+    @FindBy(linkText = "Skip")
+    public WebElement linkSkip;
     public RegisterFacebook(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }

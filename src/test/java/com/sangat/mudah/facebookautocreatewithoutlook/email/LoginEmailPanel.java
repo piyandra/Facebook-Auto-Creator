@@ -45,8 +45,8 @@ public class LoginEmailPanel {
     @FindBy(xpath = "//button")
     public WebElement signIn;
 
-
-    public LoginEmailPanel(WebDriver driver) {
+    public LoginEmailPanel(WebDriver driver){
         PageFactory.initElements(driver, this);
     }
+
 }
