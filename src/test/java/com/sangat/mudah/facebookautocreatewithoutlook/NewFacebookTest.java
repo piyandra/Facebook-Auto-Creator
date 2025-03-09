@@ -46,7 +46,7 @@ public class NewFacebookTest {
     @Test
     @Order(1)
     public void loginWebPanelTest() {
-        driver.get("https://152.42.203.70:8090/");
+        driver.get("https://yann.my.id:8090/");
         while (true){
             try {
                 if (loginEmailPanel.inputUsername.isDisplayed()) {
