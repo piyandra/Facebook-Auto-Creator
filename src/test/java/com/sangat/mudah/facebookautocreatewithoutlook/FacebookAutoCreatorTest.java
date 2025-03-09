@@ -32,7 +32,7 @@ class LoginEmailPanelTest {
          */
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
-        driver.get("https://152.42.203.70:8090/");
+        driver.get("https://yann.my.id:8090/");
         loginEmailPanel = new LoginEmailPanel(driver);
 
 
@@ -70,7 +70,7 @@ class LoginEmailPanelTest {
         Set Panel Credential yang didapat dari Cyberpanel
          */
         emailCredentials.setUsername("admin");
-        emailCredentials.setPassword("tIn9Jj9UNKhj5JUv");
+        emailCredentials.setPassword("c39fJuWfHd88B8BA");
 
         // Memasukkan Username dan Password Panel
         loginEmailPanel.inputUsername.sendKeys(emailCredentials.getUsername());
